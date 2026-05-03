@@ -53,7 +53,7 @@ def upload():
 @app.route('/files')
 def files():
     fileslist = os.listdir(UPLOAD_FOLDER)
-    return jsonify(fayllar_list)
+    return jsonify(fileslist)
 
 
 # Downloading uploaded files
@@ -61,9 +61,17 @@ def files():
 def download(filename):
     return send_from_directory(UPLOAD_FOLDER, filename, as_attachment=True)
 
+# load requirement icons
+@app.route('/icon/<iconname>')
+def iconload(iconname):
+  if not os.path.exists("icons/"+iconname):
+    return send_from_directory('icons', "unknown.png")
+  return send_from_directory('icons', iconname)
+
 
 if __name__ == '__main__':
     iface, host_ip = find_active_interface()
     print(f"Active interface: {iface} ({host_ip})")
     app.run(debug=True, port=9339, host=host_ip)
+
 

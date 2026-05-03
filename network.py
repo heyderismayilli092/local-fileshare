@@ -1,6 +1,7 @@
 import fcntl
 import struct
 import psutil
+import socket
 
 # get ip address
 def get_ip_address(ifname):
