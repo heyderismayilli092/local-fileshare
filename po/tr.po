@@ -1,0 +1,38 @@
+# Heydar Ismayilli <heyderismayilli092@gmail.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-24 09:02+0300\n"
+"PO-Revision-Date: 2026-02-24 09:06+0300\n"
+"Last-Translator: Heydar Ismayilli <heyderismayilli092@gmail.com>\n"
+"Language-Team: Turkish <dev@pardus.org.tr>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"X-Generator: Gtranslator 48.0\n"
+
+msgid "Pardus File Share About"
+msgstr "Pardus Dosya Paylaşımı Hakkında"
+
+msgid "This tool allows you to easily transfer files between your Pardus device and other devices connected to the same network"
+msgstr "Bu araç, Pardus cihazınız ile aynı ağa bağlı diğer cihazlar arasında dosyaları kolayca aktarmanıza olanak tanır"
+
+msgid "Pardus File Share"
+msgstr "Pardus Dosya Paylaşımı"
+
+msgid "Select the folder to share:"
+msgstr "Paylaşılacak klasörü seçiniz:"
+
+msgid "Share"
+msgstr "Paylaş"
+
+msgid """🟢  Open your browser on your other device connected to the same network
+🌎  Enter the following address exactly as it is into the browser that opens: """
+msgstr """🟢 Aynı ağa bağlı diğer cihazınızda tarayıcınızı açın
+🌎 Açılan tarayıcıya aşağıdaki adresi aynen olduğu gibi girin: """
+
+msgid "Stop File Sharing"
+msgstr "Dosya Paylaşımını Durdur"

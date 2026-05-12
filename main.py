@@ -3,20 +3,22 @@
 
 import gi
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk
+from gi.repository import Gtk, GObject
 
 import os
 import socket
 import subprocess
+import locale
+from locale import gettext as _
+
+locale.bindtextdomain('pardus-fileshare', '/usr/share/locale')
+locale.textdomain('pardus-fileshare')
 
 GLADE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ui/MainGlade.glade")
-
-# Flask uygulamasının yolu — kendi flask script'inin adını buraya yaz
 FLASK_APP_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "app.py")
 
 
 def get_local_ip():
-    """Makinenin yerel IP adresini döndürür."""
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         s.connect(("8.8.8.8", 80))
@@ -56,12 +58,6 @@ class PardusFileShare:
             "processbox":   self.processbox,
             "aboutbtn":     self.aboutbtn,
         }
-        for name, obj in widgets.items():
-            if obj is None:
-                raise RuntimeError(
-                    f"Glade'den '{name}' widget'ı yüklenemedi. "
-                    f"Glade dosyasındaki id ile eşleştiğinden emin ol."
-                )
 
         # Sinyaller
         self.mainwindow.connect("destroy", self._on_destroy)
@@ -96,7 +92,7 @@ class PardusFileShare:
         self.processbox.show()
         self.message.set_uri(f"http://{ip}:9339")  # linkbutton url
         self.message.set_label(f"http://{ip}:9339")  # linkbutton label
-        self.sharefolder_text.set_label(f"Shared folder: {sharedfolder}")
+        self.sharefolder_text.set_text(_("Shared folder:")+sharedfolder)
         self.message.show()
         self.stopshare.show()
 
@@ -111,16 +107,12 @@ class PardusFileShare:
         env = os.environ.copy()
         env["SHARE_FOLDER"] = folder_path
 
-        try:
-            self.flask_process = subprocess.Popen(
-                ["python3", "fileserver.py", folder_path],
-                env=env,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-            )
-        except FileNotFoundError:
-            self._show_custom_error("Flask Hatası: Uygulama bulunamadı:")
-            return
+        self.flask_process = subprocess.Popen(
+            ["python3", "fileserver.py", folder_path],
+            env=env,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
 
         ip = get_local_ip()
         self._set_sharing_state(ip, folder_path)
