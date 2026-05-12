@@ -295,6 +295,18 @@
       margin: 0 auto 12px;
     }
 
+    #kullanici {
+      font-size: 15px;
+      font-family: sans-serif;
+    }
+
+    .cizgi {
+      size: 2px;
+      color: var(--accent);
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
     .empty-state p { font-size: 14px; }
 
     /* ── Responsive ── */
@@ -312,7 +324,7 @@
   <header class="topbar">
     <div class="topbar-brand">
       <div class="topbar-logo">
-        <img src="/icon/pardus.png"></img>
+        <img src="/icon/pardus.png" width="40" height="40"></img>
       </div>
       <span class="topbar-title">Pardus Dosya Paylaşımı</span>
     </div>
@@ -350,6 +362,8 @@
     </section>
 
     <!-- File list -->
+    <h3 id="kullanici">Paylaşan Kullanıcı: <b style="color: #4f8ef7">{{compuser}}</b></h3>
+    <hr class="cizgi"></hr>
     <div class="list-header">
       <span class="list-label">Paylaşılan Dosyalar</span>
     </div>

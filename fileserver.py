@@ -3,6 +3,7 @@
 from flask import Flask, request, render_template, jsonify, send_from_directory
 import os
 import sys
+import subprocess
 import socket
 from network import get_ip_address, find_active_interface
 
@@ -15,7 +16,8 @@ CHUNK_FOLDER = "/tmp/fileshare-chunks"
 # index screen
 @app.route('/')
 def index():
-    return render_template('index.html')
+    compuser = subprocess.run(['whoami'], capture_output=True, text=True).stdout  # retrieve system user
+    return render_template('index.html', compuser=compuser)
 
 
 # Uploads incoming files to the server
