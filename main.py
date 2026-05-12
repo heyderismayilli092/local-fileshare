@@ -35,21 +35,23 @@ class PardusFileShare:
         self.builder.add_from_file(GLADE_FILE)
 
         # Widget referansları
-        self.mainwindow   = self.builder.get_object("mainwindow")
-        self.direntry      = self.builder.get_object("directory_entry")
-        self.share_button = self.builder.get_object("share_button")
-        self.stopshare    = self.builder.get_object("stopshare")
-        self.message      = self.builder.get_object("message")
-        self.processbox   = self.builder.get_object("processbox")
-        self.error_dialog = self.builder.get_object("directory_check")
+        self.mainwindow   = self.builder.get_object("mainwindow")  # home window
+        self.directory      = self.builder.get_object("directory")  # selected directory
+        self.share_button = self.builder.get_object("share_button")  # share button
+        self.stopshare    = self.builder.get_object("stopshare")  # share stop button
+        self.message      = self.builder.get_object("message")  # message label
+        self.sharefolder_text = self.builder.get_object("sharedfolder_text")  # shared directory label
+        self.processbox   = self.builder.get_object("processbox")  # box of objects to be displayed after sharing
+        self.error_dialog = self.builder.get_object("directory_check")  # directory error dialog
 
         # Referans kontrolü — None gelirse sebebini hemen anlarsın
         widgets = {
             "mainwindow":   self.mainwindow,
-            "directory_entry":      self.direntry,
+            "directory":    self.directory,
             "share_button": self.share_button,
             "stopshare":    self.stopshare,
             "message":      self.message,
+            "sharefolder_text": self.sharefolder_text,
             "processbox":   self.processbox,
             "error_dialog": self.error_dialog,
         }
@@ -77,9 +79,7 @@ class PardusFileShare:
 
     def _set_initial_state(self):
         """Uygulama ilk açıldığında / paylaşım durduğunda görünüm."""
-        self.direntry.set_placeholder_text("Klasör yolunu girin:")
-        self.direntry.set_text("")
-        self.direntry.show()
+        self.directory.show()
         self.share_button.show()
         """Paylaşım başladığında görünüm."""
 
@@ -87,14 +87,15 @@ class PardusFileShare:
         self.message.hide()
         self.stopshare.hide()
 
-    def _set_sharing_state(self, ip: str, port: int = 9339):
+    def _set_sharing_state(self, ip: str, sharedfolder: str):
         """Paylaşım başladığında görünüm."""
-        self.direntry.hide()
+        self.directory.hide()
         self.share_button.hide()
 
         self.processbox.show()
-        self.message.set_uri(f"http://{ip}:{port}")  # linkbutton url
-        self.message.set_label(f"http://{ip}:{port}")  # linkbutton label
+        self.message.set_uri(f"http://{ip}:9339")  # linkbutton url
+        self.message.set_label(f"http://{ip}:9339")  # linkbutton label
+        self.sharefolder_text.set_label(f"Shared folder: {sharedfolder}")
         self.message.show()
         self.stopshare.show()
 
@@ -102,8 +103,9 @@ class PardusFileShare:
     # Sinyal işleyicileri
     # ------------------------------------------------------------------
 
+    # share process
     def _on_share_clicked(self, widget):
-        folder_path = self.direntry.get_text().strip()
+        folder_path = self.directory.get_filename()
 
         if not folder_path or not os.path.isdir(folder_path):
             self.error_dialog.run()
@@ -125,8 +127,9 @@ class PardusFileShare:
             return
 
         ip = get_local_ip()
-        self._set_sharing_state(ip)
+        self._set_sharing_state(ip, folder_path)
 
+    # stop process
     def _on_stop_clicked(self, widget):
         if self.flask_process and self.flask_process.poll() is None:
             self.flask_process.terminate()
