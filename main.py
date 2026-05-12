@@ -42,7 +42,8 @@ class PardusFileShare:
         self.message      = self.builder.get_object("message")  # message label
         self.sharefolder_text = self.builder.get_object("sharedfolder_text")  # shared directory label
         self.processbox   = self.builder.get_object("processbox")  # box of objects to be displayed after sharing
-        self.error_dialog = self.builder.get_object("directory_check")  # directory error dialog
+        self.aboutbtn     = self.builder.get_object("aboutbtn")  # about dialog button
+        self.about_dialog = self.builder.get_object("about_dialog")  # about screen
 
         # Referans kontrolü — None gelirse sebebini hemen anlarsın
         widgets = {
@@ -53,7 +54,7 @@ class PardusFileShare:
             "message":      self.message,
             "sharefolder_text": self.sharefolder_text,
             "processbox":   self.processbox,
-            "error_dialog": self.error_dialog,
+            "aboutbtn":     self.aboutbtn,
         }
         for name, obj in widgets.items():
             if obj is None:
@@ -66,7 +67,7 @@ class PardusFileShare:
         self.mainwindow.connect("destroy", self._on_destroy)
         self.share_button.connect("clicked", self._on_share_clicked)
         self.stopshare.connect("clicked", self._on_stop_clicked)
-        self.error_dialog.connect("response", lambda d, r: d.hide())
+        self.aboutbtn.connect("clicked", self._on_aboutdialog)
 
         # Önce pencereyi göster, SONRA başlangıç görünümünü ayarla
         # (show_all'dan önce hide() çağırmak işe yaramaz)
@@ -107,11 +108,6 @@ class PardusFileShare:
     def _on_share_clicked(self, widget):
         folder_path = self.directory.get_filename()
 
-        if not folder_path or not os.path.isdir(folder_path):
-            self.error_dialog.run()
-            self.error_dialog.hide()
-            return
-
         env = os.environ.copy()
         env["SHARE_FOLDER"] = folder_path
 
@@ -139,6 +135,12 @@ class PardusFileShare:
                 self.flask_process.kill()
         self.flask_process = None
         self._set_initial_state()
+
+    # about screen
+    def _on_aboutdialog(self, widget):
+      self.about_dialog.run()
+      self.about_dialog.hide()
+      return
 
     def _on_destroy(self, widget):
         self._on_stop_clicked(None)
