@@ -36,19 +36,21 @@ class PardusFileShare:
 
         # Widget referansları
         self.mainwindow   = self.builder.get_object("mainwindow")
-        self.ipentry      = self.builder.get_object("ipentry")
+        self.direntry      = self.builder.get_object("directory_entry")
         self.share_button = self.builder.get_object("share_button")
         self.stopshare    = self.builder.get_object("stopshare")
         self.message      = self.builder.get_object("message")
+        self.processbox   = self.builder.get_object("processbox")
         self.error_dialog = self.builder.get_object("directory_check")
 
         # Referans kontrolü — None gelirse sebebini hemen anlarsın
         widgets = {
             "mainwindow":   self.mainwindow,
-            "ipentry":      self.ipentry,
+            "directory_entry":      self.direntry,
             "share_button": self.share_button,
             "stopshare":    self.stopshare,
             "message":      self.message,
+            "processbox":   self.processbox,
             "error_dialog": self.error_dialog,
         }
         for name, obj in widgets.items():
@@ -75,21 +77,24 @@ class PardusFileShare:
 
     def _set_initial_state(self):
         """Uygulama ilk açıldığında / paylaşım durduğunda görünüm."""
-        self.ipentry.set_placeholder_text("Klasör yolunu girin:")
-        self.ipentry.set_text("")
-        self.ipentry.show()
+        self.direntry.set_placeholder_text("Klasör yolunu girin:")
+        self.direntry.set_text("")
+        self.direntry.show()
         self.share_button.show()
         """Paylaşım başladığında görünüm."""
 
+        self.processbox.hide()
         self.message.hide()
         self.stopshare.hide()
 
     def _set_sharing_state(self, ip: str, port: int = 9339):
         """Paylaşım başladığında görünüm."""
-        self.ipentry.hide()
+        self.direntry.hide()
         self.share_button.hide()
 
-        self.message.set_text(f"http://{ip}:{port}")
+        self.processbox.show()
+        self.message.set_uri(f"http://{ip}:{port}")  # linkbutton url
+        self.message.set_label(f"http://{ip}:{port}")  # linkbutton label
         self.message.show()
         self.stopshare.show()
 
@@ -98,7 +103,7 @@ class PardusFileShare:
     # ------------------------------------------------------------------
 
     def _on_share_clicked(self, widget):
-        folder_path = self.ipentry.get_text().strip()
+        folder_path = self.direntry.get_text().strip()
 
         if not folder_path or not os.path.isdir(folder_path):
             self.error_dialog.run()

@@ -2,6 +2,39 @@
 <!-- Generated with glade 3.40.0 -->
 <interface>
   <requires lib="gtk+" version="3.24"/>
+  <object class="GtkAboutDialog">
+    <property name="can-focus">False</property>
+    <property name="type-hint">dialog</property>
+    <property name="program-name">Pardus File Share About</property>
+    <property name="version">1.0</property>
+    <property name="copyright" translatable="yes">© TÜBİTAK BİLGEM</property>
+    <property name="comments" translatable="yes">This tool allows you to easily transfer files between your Pardus device and other devices connected to the same network</property>
+    <property name="website">https://github.com/heyderismayilli092/pardus-fileshare</property>
+    <property name="website-label" translatable="yes">Web Page</property>
+    <property name="authors">Heydar Ismayilli</property>
+    <property name="logo-icon-name">image-missing</property>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="can-focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox">
+            <property name="can-focus">False</property>
+            <property name="layout-style">end</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+    </child>
+  </object>
   <object class="GtkMessageDialog" id="directory_check">
     <property name="can-focus">False</property>
     <property name="default-width">200</property>
@@ -40,7 +73,7 @@
   </object>
   <object class="GtkWindow" id="mainwindow">
     <property name="can-focus">False</property>
-    <property name="default-width">440</property>
+    <property name="default-width">550</property>
     <property name="default-height">250</property>
     <child>
       <object class="GtkBox">
@@ -48,38 +81,38 @@
         <property name="can-focus">False</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkHeaderBar" id="apptitle">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="margin-bottom">64</property>
-            <property name="title" translatable="yes">Pardus File Share</property>
-            <property name="subtitle" translatable="yes">1.0</property>
-            <property name="show-close-button">True</property>
-            <child>
-              <placeholder/>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
           <object class="GtkBox" id="mainbox">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
+            <property name="margin-top">26</property>
             <property name="orientation">vertical</property>
             <child>
-              <object class="GtkEntry" id="ipentry">
+              <object class="GtkLabel">
                 <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="placeholder-text" translatable="yes">Enter the IP address:</property>
+                <property name="can-focus">False</property>
+                <property name="margin-bottom">13</property>
+                <property name="label" translatable="yes">Select the folder to share:</property>
+                <attributes>
+                  <attribute name="font-desc" value="Sans Bold 12"/>
+                </attributes>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
                 <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="directory_entry">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="margin-bottom">7</property>
+                <property name="placeholder-text" translatable="yes">Enter the directory:</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
               </packing>
             </child>
             <child>
@@ -92,7 +125,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">1</property>
+                <property name="position">2</property>
               </packing>
             </child>
             <child>
@@ -104,20 +137,24 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">2</property>
+                <property name="position">3</property>
               </packing>
             </child>
             <child>
-              <object class="GtkBox">
+              <object class="GtkBox" id="processbox">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="margin-top">24</property>
                 <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkLabel" id="message">
+                  <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">label</property>
+                    <property name="margin-left">12</property>
+                    <property name="margin-right">12</property>
+                    <property name="margin-bottom">9</property>
+                    <property name="label" translatable="yes">🟢 Open your browser on your other device connected to the same network
+🌎 Enter the following address exactly as it is into the browser that opens: </property>
                     <attributes>
                       <attribute name="font-desc" value="Sans Bold 11"/>
                     </attributes>
@@ -129,20 +166,12 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="stopshare">
+                  <object class="GtkLinkButton" id="message">
+                    <property name="label" translatable="yes">button</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="label" translatable="yes">Stop File Sharing</property>
-                        <attributes>
-                          <attribute name="font-desc" value="Sans Bold 10"/>
-                        </attributes>
-                      </object>
-                    </child>
+                    <property name="relief">none</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -154,7 +183,29 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">3</property>
+                <property name="position">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="stopshare">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">Stop File Sharing</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Sans Bold 10"/>
+                    </attributes>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">5</property>
               </packing>
             </child>
           </object>
@@ -163,6 +214,29 @@
             <property name="fill">True</property>
             <property name="position">1</property>
           </packing>
+        </child>
+      </object>
+    </child>
+    <child type="titlebar">
+      <object class="GtkHeaderBar" id="apptitle">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="title" translatable="yes">Pardus File Share</property>
+        <property name="subtitle" translatable="yes">1.0</property>
+        <property name="show-close-button">True</property>
+        <child>
+          <object class="GtkButton">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="icon-name">dialog-information-symbolic</property>
+              </object>
+            </child>
+          </object>
         </child>
       </object>
     </child>
