@@ -219,7 +219,6 @@
       font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.08em;
-      text-transform: uppercase;
       color: var(--text-faint);
     }
 
@@ -326,7 +325,7 @@
       <div class="topbar-logo">
         <img src="/icon/pardus.png" width="40" height="40"></img>
       </div>
-      <span class="topbar-title">Pardus Dosya Paylaşımı</span>
+      <span class="topbar-title">Pardus File Share</span>
     </div>
   </header>
 
@@ -343,16 +342,16 @@
             <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
           </svg>
         </div>
-        <p class="drop-title">Dosyaları buraya sürükle</p>
-        <p class="drop-sub">ya da cihazından seç</p>
+        <p class="drop-title">Drag the files here</p>
+        <p class="drop-sub">or select from your device</p>
         <button class="btn-upload" type="button" onclick="document.getElementById('fileInput').click(); event.stopPropagation();">
           <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Dosya Seç
+          Choose File
         </button>
       </div>
       <div class="progress-bar-wrap" id="progressWrap">
         <div class="progress-meta">
-          <span id="progressName">Yükleniyor...</span>
+          <span id="progressName">Uploading...</span>
           <span id="progressPct">0%</span>
         </div>
         <div class="progress-track">
@@ -362,15 +361,15 @@
     </section>
 
     <!-- File list -->
-    <h3 id="kullanici">Paylaşan Kullanıcı: <b style="color: #4f8ef7">{{compuser}}</b></h3>
+    <h3 id="kullanici">Shared by User: <b style="color: #4f8ef7">{{compuser}}</b></h3>
     <hr class="cizgi"></hr>
     <div class="list-header">
-      <span class="list-label">Paylaşılan Dosyalar</span>
+      <span class="list-label">Shared Files</span>
     </div>
     <div class="file-grid" id="fileGrid">
       <div class="empty-state">
         <img src="/icon/folder.png"></img>
-        <p>Henüz dosya yok</p>
+        <p>No files yet</p>
       </div>
     </div>
 
@@ -409,7 +408,7 @@
       if (!files.length) {
         grid.innerHTML = `<div class="empty-state">
           <img src="/icons/folder.png"></img>
-          <p>Henüz dosya yok</p>
+          <p>No files yet</p>
         </div>`;
         return;
       }
