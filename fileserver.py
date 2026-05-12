@@ -21,6 +21,8 @@ def index():
 # Uploads incoming files to the server
 @app.route('/upload', methods=['POST'])
 def upload():
+    if not os.path.exists(CHUNK_FOLDER):  # chunk folder check
+      os.makedirs(CHUNK_FOLDER)
     file = request.files['file']
     filename = request.form['filename']
     custom_name = request.form.get('custom_name')
@@ -72,6 +74,5 @@ def iconload(iconname):
 if __name__ == '__main__':
     iface, host_ip = find_active_interface()
     print(f"Active interface: {iface} ({host_ip})")
-    app.run(debug=True, port=9339, host=host_ip)
-
+    app.run(debug=False, port=9339, host=host_ip)
 
