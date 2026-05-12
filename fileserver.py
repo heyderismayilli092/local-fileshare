@@ -56,8 +56,12 @@ def upload():
 # Lists files
 @app.route('/files')
 def files():
-    fileslist = os.listdir(UPLOAD_FOLDER)
-    return jsonify(fileslist)
+    files_list = []  # files list
+    for dt in os.listdir(UPLOAD_FOLDER):
+        directory = os.path.join(UPLOAD_FOLDER, dt)
+        if os.path.isfile(directory):
+            files_list.append(dt)
+    return jsonify(files_list)
 
 
 # Downloading uploaded files
