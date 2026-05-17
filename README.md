@@ -6,6 +6,7 @@ Software for Pardus that enables easy browser-based file sharing over a local ne
 This application is developed based on Python3 and GTK+ 3. Dependencies:
 ```bash
 python3-flask
+gunicorn
 ```
 
 Clone the repository
@@ -15,7 +16,7 @@ git clone https://github.com/heyderismayilli092/pardus-fileshare ~/pardus-filesh
 
 Run application
 ```bash
-python3 ~/pardus-fileshare/main.py
+python3 ~/pardus-fileshare/src/main.py
 ```
 
 ### **Screenshots**
@@ -25,3 +26,7 @@ python3 ~/pardus-fileshare/main.py
 ![pardus-fileshare 3](screenshots/pardus-fileshare-3.png)
 ![pardus-fileshare 4](screenshots/pardus-fileshare-4.png)
 ![pardus-fileshare 5](screenshots/pardus-fileshare-5.jpg)
+
+
+NOTE: This software was prepared as part of the "Teknofest 2026 Pardus Bug Finding and Suggestion Competition"
+
