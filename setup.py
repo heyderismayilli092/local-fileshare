@@ -44,7 +44,7 @@ data_files = [
 
     ("/usr/share/pardus/pardus-fileshare/src",
      ["src/main.py",
-      "src/fileshare.py",
+      "src/fileserver.py",
       "src/network.py"]),
 
     ("/usr/share/pardus/pardus-fileshare/src/templates", ["src/templates/index.html"]),
