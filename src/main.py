@@ -14,7 +14,7 @@ from locale import gettext as _
 locale.bindtextdomain('pardus-fileshare', '/usr/share/locale')
 locale.textdomain('pardus-fileshare')
 
-GLADE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ui/MainWindow.glade")
+GLADE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "/usr/share/pardus/pardus-fileshare/ui/MainWindow.glade")
 FLASK_APP_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "app.py")
 
 
@@ -155,7 +155,6 @@ class PardusFileShare:
         dlg.destroy()
 
 
-if __name__ == "__main__":
-    app = PardusFileShare()
-    Gtk.main()
+app = PardusFileShare()
+Gtk.main()
 
