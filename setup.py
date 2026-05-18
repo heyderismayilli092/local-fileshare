@@ -81,7 +81,7 @@ setup(
     data_files=data_files,
     author="Heydar Ismayilli",
     author_email="heyderismayilli092@gmail.com",
-    description="Redshift based night light application",
+    description="Software for Pardus that enables easy browser-based file sharing over a local network among other devices",
     license="GPLv3",
     keywords="pardus-fileshare, fileshare, share",
     url="https://github.com/heyderismayilli092/pardus-fileshare",
