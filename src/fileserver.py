@@ -9,9 +9,11 @@ from network import get_ip_address, find_active_interface
 
 
 app = Flask(__name__)
-UPLOAD_FOLDER = sys.argv[1]
+#UPLOAD_FOLDER = sys.argv[1]
+UPLOAD_FOLDER = os.getenv("MOD")
 CHUNK_FOLDER = "/tmp/fileshare-chunks"
 
+icons = os.path.dirname(os.path.abspath(__file__)) + "/icons"
 
 # index screen
 @app.route('/')
@@ -72,13 +74,11 @@ def download(filename):
 # load requirement icons
 @app.route('/icon/<iconname>')
 def iconload(iconname):
-  if not os.path.exists("icons/"+iconname):
-    return send_from_directory('icons', "unknown.png")
-  return send_from_directory('icons', iconname)
+  if not os.path.exists(icons+"/"+iconname):
+    return send_from_directory(icons, "unknown.png")
+  return send_from_directory(icons, iconname)
 
 
 if __name__ == '__main__':
-    iface, host_ip = find_active_interface()
-    print(f"Active interface: {iface} ({host_ip})")
-    app.run(debug=False, port=9339, host=host_ip)
+    app.run(debug=False, port=9339, host="127.0.0.1")
 

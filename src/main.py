@@ -10,6 +10,7 @@ import socket
 import subprocess
 import locale
 from locale import gettext as _
+from network import get_ip_address, find_active_interface
 
 locale.bindtextdomain('pardus-fileshare', '/usr/share/locale')
 locale.textdomain('pardus-fileshare')
@@ -103,12 +104,14 @@ class PardusFileShare:
     # share process
     def _on_share_clicked(self, widget):
         folder_path = self.directory.get_filename()
+        
+        iface, host_ip = find_active_interface()
 
         env = os.environ.copy()
         env["SHARE_FOLDER"] = folder_path
-
+        
         self.flask_process = subprocess.Popen(
-            ["python3", fileserver, folder_path],
+            ["MOD="+folder_path, "gunicorn", "--chdir", "/usr/share/pardus/pardus-fileshare/src", "-b", host_ip+":9339", "fileserver:app"],
             env=env,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
