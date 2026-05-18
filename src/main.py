@@ -108,10 +108,10 @@ class PardusFileShare:
         iface, host_ip = find_active_interface()
 
         env = os.environ.copy()
-        env["SHARE_FOLDER"] = folder_path
-        
+        env["MOD"] = folder_path
+
         self.flask_process = subprocess.Popen(
-            ["MOD="+folder_path, "gunicorn", "--chdir", "/usr/share/pardus/pardus-fileshare/src", "-b", host_ip+":9339", "fileserver:app"],
+            ["gunicorn", "--chdir", "/usr/share/pardus/pardus-fileshare/src", "-b", host_ip+":9339", "fileserver:app"],
             env=env,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
