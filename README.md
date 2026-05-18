@@ -19,6 +19,13 @@ Run application
 python3 ~/pardus-fileshare/src/main.py
 ```
 
+### Build .deb package
+```bash
+sudo apt install devscripts git-buildpackage
+sudo mk-build-deps -ir
+gbp buildpackage --git-export-dir=/tmp/build/pardus-fileshare -us -uc
+```
+
 ### **Screenshots**
 
 ![pardus-fileshare 1](screenshots/pardus-fileshare-1.png)
