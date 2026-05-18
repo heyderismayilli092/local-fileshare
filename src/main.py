@@ -14,8 +14,8 @@ from locale import gettext as _
 locale.bindtextdomain('pardus-fileshare', '/usr/share/locale')
 locale.textdomain('pardus-fileshare')
 
-GLADE_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "/usr/share/pardus/pardus-fileshare/ui/MainWindow.glade")
-FLASK_APP_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "app.py")
+GLADE_FILE = os.path.dirname(os.path.abspath(__file__)) + "/../ui/MainWindow.glade"
+fileserver = os.path.dirname(os.path.abspath(__file__)) + "/fileserver.py"
 
 
 def get_local_ip():
@@ -108,7 +108,7 @@ class PardusFileShare:
         env["SHARE_FOLDER"] = folder_path
 
         self.flask_process = subprocess.Popen(
-            ["python3", "fileserver.py", folder_path],
+            ["python3", fileserver, folder_path],
             env=env,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
