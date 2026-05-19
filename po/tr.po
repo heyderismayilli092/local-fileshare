@@ -29,10 +29,11 @@ msgstr "Paylaşılacak klasörü seçiniz:"
 msgid "Share"
 msgstr "Paylaş"
 
-msgid """🟢  Open your browser on your other device connected to the same network"""
-"""🌎  Enter the following address exactly as it is into the browser that opens: """
-msgstr """🟢 Aynı ağa bağlı diğer cihazınızda tarayıcınızı açın"""
-"""🌎 Açılan tarayıcıya aşağıdaki adresi aynen olduğu gibi girin: """
+msgid "🟢  Open your browser on your other device connected to the same network\n🌎  Enter the following address exactly as it is into the browser that opens:"
+msgstr "🟢 Aynı ağa bağlı diğer cihazınızda tarayıcınızı açın\n🌎 Açılan tarayıcıya aşağıdaki adresi aynen olduğu gibi girin:"
+
+msgid "Shared folder:"
+msgstr "Paylaşılan klasör:"
 
 msgid "Stop File Sharing"
 msgstr "Dosya Paylaşımını Durdur"
