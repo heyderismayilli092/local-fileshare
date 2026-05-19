@@ -19,17 +19,6 @@ GLADE_FILE = os.path.dirname(os.path.abspath(__file__)) + "/../ui/MainWindow.gla
 fileserver = os.path.dirname(os.path.abspath(__file__)) + "/fileserver.py"
 
 
-def get_local_ip():
-    try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(("8.8.8.8", 80))
-        ip = s.getsockname()[0]
-        s.close()
-        return ip
-    except Exception:
-        return "127.0.0.1"
-
-
 class PardusFileShare:
     def __init__(self):
         self.flask_process = None
@@ -43,6 +32,7 @@ class PardusFileShare:
         self.share_button = self.builder.get_object("share_button")  # share button
         self.stopshare    = self.builder.get_object("stopshare")  # share stop button
         self.message      = self.builder.get_object("message")  # message label
+        self.conn_error   = self.builder.get_object("conn_error")  # connection error output label
         self.sharefolder_text = self.builder.get_object("sharedfolder_text")  # shared directory label
         self.processbox   = self.builder.get_object("processbox")  # box of objects to be displayed after sharing
         self.description  = self.builder.get_object("description")  # description label
@@ -73,11 +63,13 @@ class PardusFileShare:
         self.processbox.hide()
         self.message.hide()
         self.stopshare.hide()
+        self.conn_error.hide()
 
     def _set_sharing_state(self, ip: str, sharedfolder: str):
         """Paylaşım başladığında görünüm."""
         self.directory.hide()
         self.share_button.hide()
+        self.conn_error.hide()
 
         self.processbox.show()
         self.message.set_uri(f"http://{ip}:9339")  # linkbutton url
@@ -108,8 +100,11 @@ class PardusFileShare:
             stderr=subprocess.PIPE,
         )
 
-        ip = get_local_ip()
-        self._set_sharing_state(ip, folder_path)
+        if host_ip == "127.0.0.1":
+          self.conn_error.show()
+          self.conn_error.set_label(_("Connect to a network and try again !"))
+        else:
+          self._set_sharing_state(host_ip, folder_path)
 
     # stop process
     def _on_stop_clicked(self, widget):
