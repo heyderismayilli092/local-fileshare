@@ -45,20 +45,9 @@ class PardusFileShare:
         self.message      = self.builder.get_object("message")  # message label
         self.sharefolder_text = self.builder.get_object("sharedfolder_text")  # shared directory label
         self.processbox   = self.builder.get_object("processbox")  # box of objects to be displayed after sharing
+        self.description  = self.builder.get_object("description")  # description label
         self.aboutbtn     = self.builder.get_object("aboutbtn")  # about dialog button
         self.about_dialog = self.builder.get_object("about_dialog")  # about screen
-
-        # Referans kontrolü — None gelirse sebebini hemen anlarsın
-        widgets = {
-            "mainwindow":   self.mainwindow,
-            "directory":    self.directory,
-            "share_button": self.share_button,
-            "stopshare":    self.stopshare,
-            "message":      self.message,
-            "sharefolder_text": self.sharefolder_text,
-            "processbox":   self.processbox,
-            "aboutbtn":     self.aboutbtn,
-        }
 
         # Sinyaller
         self.mainwindow.connect("destroy", self._on_destroy)
@@ -93,6 +82,8 @@ class PardusFileShare:
         self.processbox.show()
         self.message.set_uri(f"http://{ip}:9339")  # linkbutton url
         self.message.set_label(f"http://{ip}:9339")  # linkbutton label
+
+        self.description.set_label(_("🟢  Open your browser on your other device connected to the same network\n🌎  Enter the following address exactly as it is into the browser that opens:"))
         self.sharefolder_text.set_text(_("Shared folder:")+sharedfolder)
         self.message.show()
         self.stopshare.show()
