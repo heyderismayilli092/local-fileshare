@@ -14,9 +14,6 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0\n"
 "X-Generator: Gtranslator 48.0\n"
 
-msgid "Pardus File Share About"
-msgstr "Pardus Dosya Paylaşımı Hakkında"
-
 msgid "This tool allows you to easily transfer files between your Pardus device and other devices connected to the same network"
 msgstr "Bu araç, Pardus cihazınız ile aynı ağa bağlı diğer cihazlar arasında dosyaları kolayca aktarmanıza olanak tanır"
 
