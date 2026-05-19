@@ -69,7 +69,8 @@ data_files = [
       "src/icons/zip.png"]),
 
     ("/usr/share/icons/hicolor/scalable/apps/",
-     ["pardus-fileshare.png"])
+     ["pardus-fileshare.png",
+      "pardus-fileshare-64x64.png"])
 ] + create_mo_files()
 
 setup(
