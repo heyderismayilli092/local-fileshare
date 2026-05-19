@@ -6,7 +6,7 @@
     <property name="can-focus">False</property>
     <property name="type-hint">dialog</property>
     <property name="program-name">Pardus File Share About</property>
-    <property name="version">1.0</property>
+    <property name="version">0.0.1</property>
     <property name="copyright">© TÜBİTAK BİLGEM</property>
     <property name="comments" translatable="yes">This tool allows you to easily transfer files between your Pardus device and other devices connected to the same network</property>
     <property name="website">https://github.com/heyderismayilli092/pardus-fileshare</property>
@@ -234,7 +234,7 @@
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <property name="title" translatable="yes">Pardus File Share</property>
-        <property name="subtitle" translatable="yes">1.0</property>
+        <property name="subtitle" translatable="yes">0.0.1</property>
         <property name="show-close-button">True</property>
         <child>
           <object class="GtkButton" id="aboutbtn">
