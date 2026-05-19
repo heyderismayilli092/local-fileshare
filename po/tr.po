@@ -23,6 +23,9 @@ msgstr "Pardus Dosya Paylaşımı"
 msgid "Select the folder to share:"
 msgstr "Paylaşılacak klasörü seçiniz:"
 
+msgid "Connect to a network and try again !"
+msgstr "Ağ bağlantısı kurup tekrar deneyin !"
+
 msgid "Share"
 msgstr "Paylaş"
 
