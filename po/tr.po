@@ -37,3 +37,15 @@ msgstr "Paylaşılan klasör:"
 
 msgid "Stop File Sharing"
 msgstr "Dosya Paylaşımını Durdur"
+
+msgid "Scan the QR Code"
+msgstr "QR Kodu tarayınız"
+
+msgid "QR Code"
+msgstr "QR Kod"
+
+msgid "Scan the QR code below to access the link"
+msgstr "Bağlantıya erişmek için aşağıdaki QR kodunu tarayın"
+
+msgid "Scan the QR code below with your phone or tablet:"
+msgstr "Aşağıdaki QR kodunu telefonunuz veya tabletinizle tarayınız:"
