@@ -1,6 +1,11 @@
 # pardus-fileshare
 Software for Pardus that enables easy browser-based file sharing over a local network among other devices
 
+### Features
+1. You can share the folder you want by selecting it from your Pardus computer
+2. Ability to wirelessly upload and download files from a device connected to the shared folder
+3. Quickly access the link by scanning the QR code
+
 ### **Dependencies**
 
 This application is developed based on Python3 and GTK+ 3. Dependencies:
