@@ -1,3 +1,10 @@
+pardus-fileshare (0.0.1+nmu1) unstable; urgency=medium
+
+  * The ability to scan the sharing link using a QR code has been added
+  *
+
+ -- Heydar Ismayilli <heyderismayilli092@gmail.com>  Wed, 20 May 2026 19:44:00 +0400
+
 pardus-fileshare (0.0.1) unstable; urgency=medium
 
   * Initial release.
