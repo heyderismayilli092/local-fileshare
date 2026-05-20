@@ -9,6 +9,7 @@ import os
 import socket
 import subprocess
 import locale
+import segno
 from locale import gettext as _
 from network import get_ip_address, find_active_interface
 
@@ -26,7 +27,9 @@ class PardusFileShare:
         self.builder = Gtk.Builder()
         self.builder.add_from_file(GLADE_FILE)
 
-        # Widget referansları
+        # -------Widget referansları-------
+
+        # Main Window
         self.mainwindow   = self.builder.get_object("mainwindow")  # home window
         self.directory    = self.builder.get_object("directory")  # selected directory
         self.share_button = self.builder.get_object("share_button")  # share button
@@ -35,15 +38,31 @@ class PardusFileShare:
         self.conn_error   = self.builder.get_object("conn_error")  # connection error output label
         self.sharefolder_text = self.builder.get_object("sharedfolder_text")  # shared directory label
         self.processbox   = self.builder.get_object("processbox")  # box of objects to be displayed after sharing
+        self.qrwindow_button = self.builder.get_object("qrwindow_button")  # qr code window
         self.description  = self.builder.get_object("description")  # description label
         self.aboutbtn     = self.builder.get_object("aboutbtn")  # about dialog button
+
+        # About Window
         self.about_dialog = self.builder.get_object("about_dialog")  # about screen
 
-        # Sinyaller
+        # QR Code Window
+        self.qrcode_window  = self.builder.get_object("qrcode_window")  # qr code screen
+        self.qrwindow_close = self.builder.get_object("qrwindow_close") # qr code window close button
+        self.qr_image = self.builder.get_object("qr_image")  # qr code image
+        # --------------
+
+
+        # -------Signals-------
+        # Main Window
         self.mainwindow.connect("destroy", self._on_destroy)
         self.share_button.connect("clicked", self._on_share_clicked)
         self.stopshare.connect("clicked", self._on_stop_clicked)
         self.aboutbtn.connect("clicked", self._on_aboutdialog)
+
+        # QR Code Window
+        self.qrwindow_button.connect("clicked", self._on_qrwindow)
+        self.qrwindow_close.connect("clicked", self._on_qrwindow_close)
+        # --------------
 
         # Önce pencereyi göster, SONRA başlangıç görünümünü ayarla
         # (show_all'dan önce hide() çağırmak işe yaramaz)
@@ -54,19 +73,18 @@ class PardusFileShare:
     # Durum yönetimi
     # ------------------------------------------------------------------
 
+    # Uygulama ilk açıldığında / paylaşım durduğunda görünüm
     def _set_initial_state(self):
-        """Uygulama ilk açıldığında / paylaşım durduğunda görünüm."""
         self.directory.show()
         self.share_button.show()
-        """Paylaşım başladığında görünüm."""
-
         self.processbox.hide()
         self.message.hide()
         self.stopshare.hide()
         self.conn_error.hide()
+        self.qrwindow_button.hide()
 
     def _set_sharing_state(self, ip: str, sharedfolder: str):
-        """Paylaşım başladığında görünüm."""
+        # Paylaşım başladığında görünüm
         self.directory.hide()
         self.share_button.hide()
         self.conn_error.hide()
@@ -75,19 +93,20 @@ class PardusFileShare:
         self.message.set_uri(f"http://{ip}:9339")  # linkbutton url
         self.message.set_label(f"http://{ip}:9339")  # linkbutton label
 
+        self.ipaddr = f"http://{ip}:9339"
         self.description.set_label(_("🟢  Open your browser on your other device connected to the same network\n🌎  Enter the following address exactly as it is into the browser that opens:"))
         self.sharefolder_text.set_text(_("Shared folder:")+sharedfolder)
         self.message.show()
         self.stopshare.show()
+        self.qrwindow_button.show()
 
     # ------------------------------------------------------------------
-    # Sinyal işleyicileri
-    # ------------------------------------------------------------------
+    # Functions triggered by signals
 
     # share process
     def _on_share_clicked(self, widget):
         folder_path = self.directory.get_filename()
-        
+
         iface, host_ip = find_active_interface()
 
         env = os.environ.copy()
@@ -123,25 +142,36 @@ class PardusFileShare:
       self.about_dialog.hide()
       return
 
+    # qr code window show
+    def _on_qrwindow(self, widget):
+      self.create_qrcode()
+      self.qr_image.set_from_file("/tmp/qrcode.png")
+      self.qrcode_window.show_all()
+      return
+
+    # qr code window close
+    def _on_qrwindow_close(self, widget):
+      self.qrcode_window.hide()
+      os.remove("/tmp/qrcode.png")
+      return
+
     def _on_destroy(self, widget):
         self._on_stop_clicked(None)
         Gtk.main_quit()
 
-    # ------------------------------------------------------------------
-    # Yardımcı
-    # ------------------------------------------------------------------
 
-    def _show_custom_error(self, title: str, body: str):
-        dlg = Gtk.MessageDialog(
-            transient_for=self.mainwindow,
-            flags=0,
-            message_type=Gtk.MessageType.ERROR,
-            buttons=Gtk.ButtonsType.CLOSE,
-            text=title,
-        )
-        dlg.format_secondary_text(body)
-        dlg.run()
-        dlg.destroy()
+    # ----- other functions -----
+    # qr code create
+    def create_qrcode(self):
+      qrcode = segno.make_qr(self.ipaddr)
+      qrcode.save(
+        f"/tmp/qrcode.png",
+        scale=10,
+        light="lightblue",
+        dark="darkblue",
+        data_dark="green",
+        data_light="lightgreen",
+      )
 
 
 app = PardusFileShare()
