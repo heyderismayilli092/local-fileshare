@@ -8,6 +8,6 @@ Homepage: https://github.com/heyderismayilli092/pardus-fileshare
 
 Package: pardus-fileshare
 Architecture: all
-Depends: python3-flask, gunicorn
+Depends: python3-flask, python3-segno, gunicorn
 Description: Pardus FileShare
  Software for Pardus that enables easy browser-based file sharing over a local network among other devices
