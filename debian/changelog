@@ -1,4 +1,4 @@
-pardus-fileshare (0.0.1+nmu1) unstable; urgency=medium
+pardus-fileshare (0.0.1) unstable; urgency=medium
 
   * The ability to scan the sharing link using a QR code has been added
   *
