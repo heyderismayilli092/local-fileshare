@@ -6,6 +6,7 @@ Software for Pardus that enables easy browser-based file sharing over a local ne
 This application is developed based on Python3 and GTK+ 3. Dependencies:
 ```bash
 python3-flask
+python3-segno
 gunicorn
 ```
 
