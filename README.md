@@ -39,10 +39,13 @@ gbp buildpackage --git-export-dir=/tmp/build/local-fileshare -us -uc
 ![local-fileshare 3](screenshots/local-fileshare-3.png)
 ![local-fileshare 4](screenshots/local-fileshare-4.png)
 ![local-fileshare 5](screenshots/local-fileshare-5.png)
+![local-fileshare 6](screenshots/local-fileshare-6.png)
+![local-fileshare 7](screenshots/local-fileshare-7.png)
 
 
 ### Phone Screenshot
-![local-fileshare 5](screenshots/local-fileshare-6.png)
+![local-fileshare 8](screenshots/local-fileshare-8.jpg)
+![local-fileshare 9](screenshots/local-fileshare-9.jpg)
 
 
 NOTE: This software was prepared as part of the "Teknofest 2026 Pardus Bug Finding and Suggestion Competition"
