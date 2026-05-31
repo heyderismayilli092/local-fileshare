@@ -13,14 +13,14 @@ import segno
 from locale import gettext as _
 from network import get_ip_address, find_active_interface
 
-locale.bindtextdomain('pardus-fileshare', '/usr/share/locale')
-locale.textdomain('pardus-fileshare')
+locale.bindtextdomain('local-fileshare', '/usr/share/locale')
+locale.textdomain('local-fileshare')
 
 GLADE_FILE = os.path.dirname(os.path.abspath(__file__)) + "/../ui/MainWindow.glade"
 fileserver = os.path.dirname(os.path.abspath(__file__)) + "/fileserver.py"
 
 
-class PardusFileShare:
+class LocalFileShare:
     def __init__(self):
         self.flask_process = None
 
@@ -113,7 +113,7 @@ class PardusFileShare:
         env["MOD"] = folder_path
 
         self.flask_process = subprocess.Popen(
-            ["gunicorn", "--chdir", "/usr/share/pardus/pardus-fileshare/src", "-b", host_ip+":9339", "fileserver:app"],
+            ["gunicorn", "--chdir", "/usr/share/local-fileshare/src", "-b", host_ip+":9339", "fileserver:app"],
             env=env,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
@@ -174,6 +174,6 @@ class PardusFileShare:
       )
 
 
-app = PardusFileShare()
+app = LocalFileShare()
 Gtk.main()
 

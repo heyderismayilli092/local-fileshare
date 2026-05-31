@@ -13,11 +13,11 @@ def create_mo_files():
     for po in os.listdir(podir):
         if po.endswith(".po"):
             os.makedirs("{}/{}/LC_MESSAGES".format(podir, po.split(".po")[0]), exist_ok=True)
-            mo_file = "{}/{}/LC_MESSAGES/{}".format(podir, po.split(".po")[0], "pardus-fileshare.mo")
+            mo_file = "{}/{}/LC_MESSAGES/{}".format(podir, po.split(".po")[0], "local-fileshare.mo")
             msgfmt_cmd = 'msgfmt {} -o {}'.format(podir + "/" + po, mo_file)
             subprocess.call(msgfmt_cmd, shell=True)
             mo.append(("/usr/share/locale/" + po.split(".po")[0] + "/LC_MESSAGES",
-                       ["po/" + po.split(".po")[0] + "/LC_MESSAGES/pardus-fileshare.mo"]))
+                       ["po/" + po.split(".po")[0] + "/LC_MESSAGES/local-fileshare.mo"]))
     return mo
 
 
@@ -34,22 +34,22 @@ if os.path.exists(changelog):
     f.close()
 
 data_files = [
-    ("/usr/bin", ["pardus-fileshare"]),
+    ("/usr/bin", ["local-fileshare"]),
 
     ("/usr/share/applications",
-     ["tr.org.pardus.fileshare.desktop"]),
+     ["opensf90.local-fileshare.desktop"]),
 
-    ("/usr/share/pardus/pardus-fileshare/ui",
+    ("/usr/share/local-fileshare/ui",
      ["ui/MainWindow.glade"]),
 
-    ("/usr/share/pardus/pardus-fileshare/src",
+    ("/usr/share/local-fileshare/src",
      ["src/main.py",
       "src/fileserver.py",
       "src/network.py"]),
 
-    ("/usr/share/pardus/pardus-fileshare/src/templates", ["src/templates/index.html"]),
+    ("/usr/share/local-fileshare/src/templates", ["src/templates/index.html"]),
 
-    ("/usr/share/pardus/pardus-fileshare/src/icons",
+    ("/usr/share/local-fileshare/src/icons",
      ["src/icons/computer.png",
       "src/icons/csv.png",
       "src/icons/deb.png",
@@ -58,7 +58,7 @@ data_files = [
       "src/icons/jpg.png",
       "src/icons/mp3.png",
       "src/icons/mp4.png",
-      "src/icons/pardus.png",
+      "src/icons/local-fileshare.png",
       "src/icons/pdf.png",
       "src/icons/png.png",
       "src/icons/pptx.png",
@@ -69,21 +69,21 @@ data_files = [
       "src/icons/zip.png"]),
 
     ("/usr/share/icons/hicolor/scalable/apps/",
-     ["pardus-fileshare.png",
-      "pardus-fileshare-64x64.png"])
+     ["local-fileshare.png",
+      "local-fileshare-64x64.png"])
 ] + create_mo_files()
 
 setup(
-    name="pardus-fileshare",
+    name="local-fileshare",
     version=version,
     packages=find_packages(),
-    scripts=["pardus-fileshare"],
+    scripts=["local-fileshare"],
     install_requires=["PyGObject"],
     data_files=data_files,
     author="Heydar Ismayilli",
     author_email="heyderismayilli092@gmail.com",
-    description="Software for Pardus that enables easy browser-based file sharing over a local network among other devices",
+    description="Software for Linux operating systems that enables easy browser-based file sharing over a local network among other devices",
     license="GPLv3",
-    keywords="pardus-fileshare, fileshare, share",
-    url="https://github.com/heyderismayilli092/pardus-fileshare",
+    keywords="local-fileshare, fileshare, share",
+    url="https://github.com/heyderismayilli092/local-fileshare",
 )

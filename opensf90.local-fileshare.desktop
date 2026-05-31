@@ -1,0 +1,14 @@
+[Desktop Entry]
+Name=Local FileShare
+Name[tr]=Yerel Dosya Paylaşımı
+GenericName=Wireless File Sharing
+GenericName[tr]=Kablosuz Dosya Paylaşımı
+Comment=It allows you to share files between devices connected to your local network
+Comment[tr]=Bu özellik, yerel ağınıza bağlı cihazlar arasında dosya paylaşmanıza olanak tanır
+Exec=local-fileshare
+Icon=/usr/share/icons/hicolor/scalable/apps/local-fileshare.png
+Terminal=false
+Type=Application
+Categories=System;
+StartupNotify=true
+Keywords=fileshare;file;wireless

@@ -1,4 +1,4 @@
-# Pardus Fileshare Software
+# Local FileShare -- Server Software
 
 from flask import Flask, request, render_template, jsonify, send_from_directory
 import os

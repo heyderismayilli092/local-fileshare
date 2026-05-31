@@ -1,7 +1,7 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: pardus-fileshare
+Upstream-Name: local-fileshare
 Upstream-Contact: Heydar Ismayilli <heyderismayilli092@gmail.com>
-Source: https://github.com/heyderismayilli092/pardus-fileshare
+Source: https://github.com/heyderismayilli092/local-fileshare
 
 
 Files: *
