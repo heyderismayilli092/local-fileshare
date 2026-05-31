@@ -43,6 +43,7 @@ class LocalFileShare:
         self.qrwindow_button = self.builder.get_object("qrwindow_button")  # qr code window
         self.description  = self.builder.get_object("description")  # description label
         self.password_box = self.builder.get_object("password_box")  # password box
+        self.password_box.set_visibility(False)  # we turn off being seen while typing the password
         self.aboutbtn     = self.builder.get_object("aboutbtn")  # about dialog button
 
         # About Window
@@ -103,7 +104,6 @@ class LocalFileShare:
         self.message.show()
         self.stopshare.show()
         self.qrwindow_button.show()
-        self.password_box.show()
 
     # ------------------------------------------------------------------
     # Functions triggered by signals

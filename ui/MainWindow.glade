@@ -107,6 +107,8 @@
                 <property name="margin-top">6</property>
                 <property name="margin-bottom">17</property>
                 <property name="placeholder-text" translatable="yes">Enter the password:</property>
+                <property name="input-purpose">password</property>
+                <property name="input-hints">GTK_INPUT_HINT_LOWERCASE | GTK_INPUT_HINT_NONE</property>
               </object>
               <packing>
                 <property name="expand">False</property>
