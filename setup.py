@@ -47,7 +47,9 @@ data_files = [
       "src/fileserver.py",
       "src/network.py"]),
 
-    ("/usr/share/local-fileshare/src/templates", ["src/templates/index.html"]),
+    ("/usr/share/local-fileshare/src/templates",
+     ["src/templates/index.html",
+      "src/templates/login.html"]),
 
     ("/usr/share/local-fileshare/src/icons",
      ["src/icons/computer.png",
