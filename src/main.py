@@ -81,6 +81,7 @@ class LocalFileShare:
     def _set_initial_state(self):
         self.directory.show()
         self.share_button.show()
+        self.password_box.show()
         self.processbox.hide()
         self.message.hide()
         self.stopshare.hide()
