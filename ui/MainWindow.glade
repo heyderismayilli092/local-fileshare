@@ -7,7 +7,7 @@
     <property name="type-hint">dialog</property>
     <property name="program-name">Pardus File Share</property>
     <property name="version">0.0.1</property>
-    <property name="copyright">© TÜBİTAK BİLGEM</property>
+    <property name="copyright">© OpenSF90</property>
     <property name="comments" translatable="yes">This tool allows you to easily transfer files between your Pardus device and other devices connected to the same network</property>
     <property name="website">https://github.com/heyderismayilli092/pardus-fileshare</property>
     <property name="website-label" translatable="yes">Web Page</property>
