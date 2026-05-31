@@ -32,6 +32,12 @@ msgstr "Paylaş"
 msgid "🟢  Open your browser on your other device connected to the same network\n🌎  Enter the following address exactly as it is into the browser that opens:"
 msgstr "🟢 Aynı ağa bağlı diğer cihazınızda tarayıcınızı açın\n🌎 Açılan tarayıcıya aşağıdaki adresi aynen olduğu gibi girin:"
 
+msgid "You haven't selected any folder path!"
+msgstr "Herhangi bir klasör yolu seçmediniz!"
+
+msgid "For security purposes, you will first need to enter a password.\nYou will use this password to access the interface."
+msgstr "Güvenlik amacıyla öncelikle bir parola girmeniz gerekecektir.\nBu parolayı arayüze erişmek için kullanacaksınız."
+
 msgid "Shared folder:"
 msgstr "Paylaşılan klasör:"
 
