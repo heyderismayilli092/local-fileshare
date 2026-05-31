@@ -36,6 +36,7 @@ class LocalFileShare:
         self.directory    = self.builder.get_object("directory")  # selected directory
         self.share_button = self.builder.get_object("share_button")  # share button
         self.stopshare    = self.builder.get_object("stopshare")  # share stop button
+        self.title        = self.builder.get_object("title")  # title
         self.message      = self.builder.get_object("message")  # message label
         self.error_label   = self.builder.get_object("error_label")  # error output label
         self.sharefolder_text = self.builder.get_object("sharedfolder_text")  # shared directory label
@@ -82,6 +83,7 @@ class LocalFileShare:
         self.directory.show()
         self.share_button.show()
         self.password_box.show()
+        self.title.show()
         self.processbox.hide()
         self.message.hide()
         self.stopshare.hide()
@@ -94,6 +96,7 @@ class LocalFileShare:
         self.share_button.hide()
         self.error_label.hide()
         self.password_box.hide()
+        self.title.hide()
 
         self.processbox.show()
         self.message.set_uri(f"http://{ip}:9339")  # linkbutton url
