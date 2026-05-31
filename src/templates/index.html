@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Local File Share</title>
+  <title>{{label0}}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -325,7 +325,7 @@
       <div class="topbar-logo">
         <img src="/icon/local-fileshare.png" width="40" height="40"></img>
       </div>
-      <span class="topbar-title">Local FileShare</span>
+      <span class="topbar-title">{{label0}}</span>
     </div>
   </header>
 
@@ -342,8 +342,8 @@
             <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
           </svg>
         </div>
-        <p class="drop-title">Drag the files here</p>
-        <p class="drop-sub">or select from your device</p>
+        <p class="drop-title">{{label1}}</p>
+        <p class="drop-sub">{{label2}}</p>
         <button class="btn-upload" type="button" onclick="document.getElementById('fileInput').click(); event.stopPropagation();">
           <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           Choose File
@@ -351,7 +351,7 @@
       </div>
       <div class="progress-bar-wrap" id="progressWrap">
         <div class="progress-meta">
-          <span id="progressName">Uploading...</span>
+          <span id="progressName">{{label3}}</span>
           <span id="progressPct">0%</span>
         </div>
         <div class="progress-track">
@@ -361,15 +361,15 @@
     </section>
 
     <!-- File list -->
-    <h3 id="kullanici">Shared by User: <b style="color: #4f8ef7">{{compuser}}</b></h3>
+    <h3 id="kullanici">{{label4}} <b style="color: #4f8ef7">{{compuser}}</b></h3>
     <hr class="cizgi"></hr>
     <div class="list-header">
-      <span class="list-label">Shared Files</span>
+      <span class="list-label">{{label5}}</span>
     </div>
     <div class="file-grid" id="fileGrid">
       <div class="empty-state">
         <img src="/icon/folder.png"></img>
-        <p>No files yet</p>
+        <p>{{label6}}</p>
       </div>
     </div>
 
