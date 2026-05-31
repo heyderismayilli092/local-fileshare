@@ -99,11 +99,14 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="share_button">
-                <property name="label" translatable="yes">Share</property>
+              <object class="GtkEntry" id="password_box">
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
-                <property name="receives-default">True</property>
+                <property name="margin-left">10</property>
+                <property name="margin-right">10</property>
+                <property name="margin-top">6</property>
+                <property name="margin-bottom">17</property>
+                <property name="placeholder-text" translatable="yes">Enter the password:</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -112,15 +115,11 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="conn_error">
+              <object class="GtkButton" id="share_button">
+                <property name="label" translatable="yes">Share</property>
                 <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="margin-top">13</property>
-                <property name="label" translatable="yes">label</property>
-                <attributes>
-                  <attribute name="font-desc" value="Sans 10"/>
-                  <attribute name="foreground" value="#e0e01b1b2424"/>
-                </attributes>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -138,6 +137,23 @@
                 <property name="expand">False</property>
                 <property name="fill">True</property>
                 <property name="position">5</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="error_label">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="margin-top">13</property>
+                <property name="label" translatable="yes">label</property>
+                <attributes>
+                  <attribute name="font-desc" value="Sans 10"/>
+                  <attribute name="foreground" value="#e0e01b1b2424"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">6</property>
               </packing>
             </child>
             <child>
@@ -228,7 +244,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">6</property>
+                <property name="position">7</property>
               </packing>
             </child>
             <child>
@@ -250,7 +266,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">7</property>
+                <property name="position">8</property>
               </packing>
             </child>
           </object>

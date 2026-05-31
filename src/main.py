@@ -10,8 +10,9 @@ import socket
 import subprocess
 import locale
 import segno
+import bcrypt
 from locale import gettext as _
-from network import get_ip_address, find_active_interface
+from network import find_active_interface
 
 locale.bindtextdomain('local-fileshare', '/usr/share/locale')
 locale.textdomain('local-fileshare')
@@ -23,6 +24,7 @@ fileserver = os.path.dirname(os.path.abspath(__file__)) + "/fileserver.py"
 class LocalFileShare:
     def __init__(self):
         self.flask_process = None
+        self.passhash_file = "/tmp/local-fileshare_passhash"
 
         self.builder = Gtk.Builder()
         self.builder.add_from_file(GLADE_FILE)
@@ -35,11 +37,12 @@ class LocalFileShare:
         self.share_button = self.builder.get_object("share_button")  # share button
         self.stopshare    = self.builder.get_object("stopshare")  # share stop button
         self.message      = self.builder.get_object("message")  # message label
-        self.conn_error   = self.builder.get_object("conn_error")  # connection error output label
+        self.error_label   = self.builder.get_object("error_label")  # error output label
         self.sharefolder_text = self.builder.get_object("sharedfolder_text")  # shared directory label
         self.processbox   = self.builder.get_object("processbox")  # box of objects to be displayed after sharing
         self.qrwindow_button = self.builder.get_object("qrwindow_button")  # qr code window
         self.description  = self.builder.get_object("description")  # description label
+        self.password_box = self.builder.get_object("password_box")  # password box
         self.aboutbtn     = self.builder.get_object("aboutbtn")  # about dialog button
 
         # About Window
@@ -80,14 +83,15 @@ class LocalFileShare:
         self.processbox.hide()
         self.message.hide()
         self.stopshare.hide()
-        self.conn_error.hide()
+        self.error_label.hide()
         self.qrwindow_button.hide()
 
     def _set_sharing_state(self, ip: str, sharedfolder: str):
         # Paylaşım başladığında görünüm
         self.directory.hide()
         self.share_button.hide()
-        self.conn_error.hide()
+        self.error_label.hide()
+        self.password_box.hide()
 
         self.processbox.show()
         self.message.set_uri(f"http://{ip}:9339")  # linkbutton url
@@ -99,18 +103,39 @@ class LocalFileShare:
         self.message.show()
         self.stopshare.show()
         self.qrwindow_button.show()
+        self.password_box.show()
 
     # ------------------------------------------------------------------
     # Functions triggered by signals
 
     # share process
     def _on_share_clicked(self, widget):
-        folder_path = self.directory.get_filename()
+        raw_password = self.password_box.get_text()
+        if len(raw_password) == 0:
+          self.error_label.show()
+          self.error_label.set_label(_("For security purposes, you will first need to enter a password.\nYou will use this password to access the interface."))
+          return False
 
+        folder_path = self.directory.get_filename()
         iface, host_ip = find_active_interface()
 
         env = os.environ.copy()
         env["MOD"] = folder_path
+
+        if host_ip == "127.0.0.1":
+          self.error_label.show()
+          self.error_label.set_label(_("Connect to a network and try again !"))
+          return False
+        else:
+          password_bytes = raw_password.encode('utf-8')  # convert string password to bytes
+          salt = bcrypt.gensalt()  # generate a secure random salt (Default work factor is 12)
+          hashed_password = bcrypt.hashpw(password_bytes, salt)  # hash the password
+          # write hash password
+          tmpfile = open(self.passhash_file, "wb")
+          tmpfile.write(hashed_password)
+          tmpfile.close()
+
+          self._set_sharing_state(host_ip, folder_path)
 
         self.flask_process = subprocess.Popen(
             ["gunicorn", "--chdir", "/usr/share/local-fileshare/src", "-b", host_ip+":9339", "fileserver:app"],
@@ -119,16 +144,11 @@ class LocalFileShare:
             stderr=subprocess.PIPE,
         )
 
-        if host_ip == "127.0.0.1":
-          self.conn_error.show()
-          self.conn_error.set_label(_("Connect to a network and try again !"))
-        else:
-          self._set_sharing_state(host_ip, folder_path)
-
     # stop process
     def _on_stop_clicked(self, widget):
         if self.flask_process and self.flask_process.poll() is None:
             self.flask_process.terminate()
+            os.remove(self.passhash_file)  # remove tmp hash info file
             try:
                 self.flask_process.wait(timeout=3)
             except subprocess.TimeoutExpired:
