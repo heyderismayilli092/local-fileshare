@@ -111,15 +111,16 @@ class LocalFileShare:
     # share process
     def _on_share_clicked(self, widget):
         raw_password = self.password_box.get_text()
+
+        folder_path = self.directory.get_filename()
+        if folder_path is None:  # checking whether a folder path has been selected
+          self.error_label.show()
+          self.error_label.set_label(_("You haven't selected any folder path!"))
+          return False
+
         if len(raw_password) == 0:
           self.error_label.show()
           self.error_label.set_label(_("For security purposes, you will first need to enter a password.\nYou will use this password to access the interface."))
-          return False
-
-        folder_path = self.directory.get_filename()
-        if folder_path is not None:  # checking whether a folder path has been selected
-          self.error_label.show()
-          self.error_label.set_label(_("You haven't selected any folder path!"))
           return False
 
         iface, host_ip = find_active_interface()
