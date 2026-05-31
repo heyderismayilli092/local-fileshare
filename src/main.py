@@ -117,6 +117,11 @@ class LocalFileShare:
           return False
 
         folder_path = self.directory.get_filename()
+        if folder_path is not None:  # checking whether a folder path has been selected
+          self.error_label.show()
+          self.error_label.set_label(_("You haven't selected any folder path!"))
+          return False
+
         iface, host_ip = find_active_interface()
 
         env = os.environ.copy()
@@ -128,8 +133,7 @@ class LocalFileShare:
           return False
         else:
           password_bytes = raw_password.encode('utf-8')  # convert string password to bytes
-          salt = bcrypt.gensalt()  # generate a secure random salt (Default work factor is 12)
-          hashed_password = bcrypt.hashpw(password_bytes, salt)  # hash the password
+          hashed_password = bcrypt.hashpw(password_bytes, bcrypt.gensalt())  # hash the password
           # write hash password
           tmpfile = open(self.passhash_file, "wb")
           tmpfile.write(hashed_password)
