@@ -49,3 +49,24 @@ msgstr "Bağlantıya erişmek için aşağıdaki QR kodunu tarayın"
 
 msgid "Scan the QR code below with your phone or tablet:"
 msgstr "Aşağıdaki QR kodunu telefonunuz veya tabletinizle tarayınız:"
+
+msgid "Local FileShare"
+msgstr "Yerel Dosya Paylaşımı"
+
+msgid "Drag the files here"
+msgstr "Dosyaları buraya sürükleyin"
+
+msgid "or select from your device"
+msgstr "veya cihazınızdan seçin"
+
+msgid "Uploading..."
+msgstr "Yükleniyor..."
+
+msgid "Shared by User:"
+msgstr "Paylaşan Kullanıcı:"
+
+msgid "Shared Files"
+msgstr "Paylaşılan Dosyalar"
+
+msgid "No files yet"
+msgstr "Henüz dosya yok"
