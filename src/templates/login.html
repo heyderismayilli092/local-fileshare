@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{label0}}</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: #0d0d0f;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .login-box {
+      width: 100%;
+      max-width: 420px;
+      background: #111214;
+      border: 1px solid #2d5f9c;
+      border-radius: 12px;
+      padding: 32px;
+    }
+
+    h3 {
+      margin: 0 0 18px 0;
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .password-input {
+      width: 100%;
+      padding: 13px 14px;
+      font-size: 16px;
+      color: white;
+      background: #18191b;
+      border: 1px solid #555;
+      border-radius: 6px;
+      outline: none;
+      margin-bottom: 16px;
+    }
+
+    .password-input:focus {
+      border-color: #6b7280;
+      background: #1c1d20;
+    }
+
+    .password-input::placeholder {
+      color: #9ca3af;
+    }
+
+    .login-button {
+      width: 100%;
+      border: none;
+      border-radius: 6px;
+      padding: 13px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      color: white;
+      background: #2d5f9c;
+    }
+
+    .login-button:hover {
+      background: #366cab;
+    }
+
+    @media (max-width: 480px) {
+      .login-box {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <form class="login-box" action="/login" method="POST">
+    <h3>{{label1}}</h3>
+    <input type="password" name="password" class="password-input" required autocomplete="current-password"/>
+    <button type="submit" class="login-button">{{label2}}</button>
+  </form>
+
+</body>
+</html>
+
