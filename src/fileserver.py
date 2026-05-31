@@ -6,17 +6,15 @@ import sys
 import subprocess
 import socket
 import locale
-from locale import gettext as _
+import gettext
 from network import get_ip_address, find_active_interface
 
+locale.setlocale(locale.LC_ALL, '')  # category is being set
 locale.bindtextdomain('local-fileshare', '/usr/share/locale')
-locale.textdomain('local-fileshare')
-
-app = Flask(__name__)
-UPLOAD_FOLDER = os.getenv("MOD")
-CHUNK_FOLDER = "/tmp/fileshare-chunks"
-
-icons = os.path.dirname(os.path.abspath(__file__)) + "/icons"
+# translation is provide
+gettext.bindtextdomain('local-fileshare', '/usr/share/locale')
+gettext.textdomain('local-fileshare')
+_ = gettext.gettext
 
 # translatable interface texts
 interface_texts = {
@@ -28,6 +26,12 @@ interface_texts = {
     "label5": _("Shared Files"),
     "label6": _("No files yet")
 }
+
+app = Flask(__name__)
+UPLOAD_FOLDER = os.getenv("MOD")
+CHUNK_FOLDER = "/tmp/fileshare-chunks"
+
+icons = os.path.dirname(os.path.abspath(__file__)) + "/icons"
 
 # index screen
 @app.route('/')
