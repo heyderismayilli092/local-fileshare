@@ -5,21 +5,43 @@ import os
 import sys
 import subprocess
 import socket
+import locale
+from locale import gettext as _
 from network import get_ip_address, find_active_interface
 
+locale.bindtextdomain('local-fileshare', '/usr/share/locale')
+locale.textdomain('local-fileshare')
 
 app = Flask(__name__)
-#UPLOAD_FOLDER = sys.argv[1]
 UPLOAD_FOLDER = os.getenv("MOD")
 CHUNK_FOLDER = "/tmp/fileshare-chunks"
 
 icons = os.path.dirname(os.path.abspath(__file__)) + "/icons"
 
+# translatable interface texts
+interface_texts = {
+    "label0": _("Local FileShare"),
+    "label1": _("Drag the files here"),
+    "label2": _("or select from your device"),
+    "label3": _("Uploading..."),
+    "label4": _("Shared by User:"),
+    "label5": _("Shared Files"),
+    "label6": _("No files yet")
+}
+
 # index screen
 @app.route('/')
 def index():
     compuser = subprocess.run(['whoami'], capture_output=True, text=True).stdout  # retrieve system user
-    return render_template('index.html', compuser=compuser)
+    return render_template('index.html', compuser=compuser,
+        label0=_("Local FileShare"),
+        label1=interface_texts["label1"],
+        label2=interface_texts["label2"],
+        label3=interface_texts["label3"],
+        label4=interface_texts["label4"],
+        label5=interface_texts["label5"],
+        label6=interface_texts["label6"]
+    )
 
 
 # Uploads incoming files to the server
@@ -27,12 +49,12 @@ def index():
 def upload():
     if not os.path.exists(CHUNK_FOLDER):  # chunk folder check
       os.makedirs(CHUNK_FOLDER)
-    file = request.files['file']
+    file     = request.files['file']
     filename = request.form['filename']
     custom_name = request.form.get('custom_name')
-    save_as = custom_name if custom_name else filename
+    save_as     = custom_name if custom_name else filename
     total_chunks = int(request.form['total_chunks'])
-    chunk_index = int(request.form['chunk_index'])
+    chunk_index  = int(request.form['chunk_index'])
     # Save chunk file
     chunk_path = os.path.join(CHUNK_FOLDER, f"{save_as}_part{chunk_index}")
     file.save(chunk_path)
