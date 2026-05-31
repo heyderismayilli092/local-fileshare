@@ -14,8 +14,8 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0\n"
 "X-Generator: Gtranslator 48.0\n"
 
-msgid "This tool allows you to easily transfer files between your Linux-based device and other devices connected to the same network."
-msgstr "Bu araç, Linux işletim sistemli cihazınız ile aynı ağa bağlı diğer cihazlar arasında dosyaları kolayca aktarmanıza olanak tanır"
+msgid "Software for Linux operating systems that enables easy browser-based file sharing over a local network among other devices"
+msgstr "Linux işletim sistemleri için, yerel ağ üzerinden diğer cihazlar arasında tarayıcı tabanlı kolay dosya paylaşımını sağlayan yazılım"
 
 msgid "Local File Share"
 msgstr "Yerel Dosya Paylaşımı"
